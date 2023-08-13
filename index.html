@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Snake Game</title>
+  <meta name="mirador" content="width=device-width, initial-scale=1.0">
+  <title>Vivorita</title>
   <style>
     body {
       display: flex;
@@ -20,10 +20,10 @@
   </style>
 </head>
 <body>
-  <canvas id="gameCanvas" width="400" height="400"></canvas>
+  <canvas id="juegoCanvas" width="400" height="400"></canvas>
 
   <script>
-    const canvas = document.getElementById('gameCanvas');
+    const canvas = document.getElementById('juegoCanvas');
     const ctx = canvas.getContext('2d');
     const box = 20;
     let snake = [{ x: 9 * box, y: 10 * box }];
@@ -48,7 +48,6 @@
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw Snake
       for (let i = 0; i < snake.length; i++) {
         ctx.fillStyle = (i === 0) ? 'green' : 'white';
         ctx.fillRect(snake[i].x, snake[i].y, box, box);
@@ -57,11 +56,11 @@
         ctx.strokeRect(snake[i].x, snake[i].y, box, box);
       }
 
-      // Draw Food
+
       ctx.fillStyle = 'red';
       ctx.fillRect(food.x, food.y, box, box);
 
-      // Move Snake
+
       let snakeX = snake[0].x;
       let snakeY = snake[0].y;
 
@@ -70,7 +69,7 @@
       if (d === 'RIGHT') snakeX += box;
       if (d === 'DOWN') snakeY += box;
 
-      // Check if snake eats food
+      
       if (snakeX === food.x && snakeY === food.y) {
         score++;
         food = { x: Math.floor(Math.random() * 20) * box, y: Math.floor(Math.random() * 20) * box };
@@ -78,20 +77,20 @@
         snake.pop();
       }
 
-      // Add new head to the snake
+
       const newHead = { x: snakeX, y: snakeY };
       snake.unshift(newHead);
 
-      // Game over conditions
+
       if (snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height) {
         clearInterval(game);
-        alert('Game Over! Your score: ' + score);
+        alert('Perdiste! Tu puntuacion: ' + score);
       }
 
       for (let i = 1; i < snake.length; i++) {
         if (snake[i].x === snakeX && snake[i].y === snakeY) {
           clearInterval(game);
-          alert('Game Over! Your score: ' + score);
+          alert('Perdiste! Tu puntuacion: ' + score);
         }
       }
     }
